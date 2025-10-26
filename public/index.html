@@ -37,7 +37,8 @@
   <p>Public resolved issues: <a href="/resolved.html">View resolved</a></p>
 
   <script src="/js/app.js"></script>
-  <!-- Google Maps API (key from .env) -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2uHDH2aPzpbYR1kb_f3yg2GH_42MmT80&callback=initMap"></script>
+  <!-- Google Maps API: DO NOT commit your API key. Replace the placeholder at deploy time or set via env injection. -->
+  <!-- Example (local/dev): paste your key into .env and use a build-step to inject it into client files) -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=REPLACE_WITH_YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 </body>
 </html>

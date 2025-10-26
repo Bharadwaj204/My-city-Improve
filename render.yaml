@@ -1,0 +1,28 @@
+services:
+  # Web service
+  - type: web
+    name: my-city
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # User needs to set this
+      - key: JWT_SECRET
+        generateValue: true # Automatically generate a secure value
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false # Add your Render deployment URL here
+    autoDeploy: true

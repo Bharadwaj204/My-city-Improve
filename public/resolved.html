@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>My City — Resolved Issues</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>body{font-family:Arial,Helvetica,sans-serif;padding:12px;max-width:900px;margin:20px auto}img.thumb{max-width:160px}</style>
+</head>
+<body>
+  <h1>Resolved issues</h1>
+  <div id="list">Loading...</div>
+
+  <script>
+    async function load(){
+      const res = await fetch('/api/resolved');
+      const arr = await res.json();
+      const el = document.getElementById('list');
+      if (!arr.length) return el.innerHTML = '<p>No resolved issues (yet).</p>';
+      el.innerHTML = arr.map(c=>`<div style="border:1px solid #ddd;padding:8px;margin-bottom:8px"><h3>${escapeHtml(c.description)}</h3><p>${c.lat?`Location: ${c.lat}, ${c.lng}`:''}</p>${c.photo?`<img src="${c.photo}" class="thumb"/>`:''}<p>Status: ${c.status}</p></div>`).join('');
+    }
+    function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m])); }
+    load();
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Login — My City</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>body{font-family:Arial,Helvetica,sans-serif;padding:12px;max-width:600px;margin:20px auto}label{display:block;margin-top:8px}</style>
+</head>
+<body>
+  <h1>Admin Login</h1>
+  <form id="loginForm">
+    <label>Email <input id="email" type="email" required style="width:100%"/></label>
+    <label>Password <input id="password" type="password" required style="width:100%"/></label>
+    <button>Login</button>
+  </form>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const res = await fetch('/api/auth/login', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ email, password }) });
+      const b = await res.json();
+      if (res.ok) {
+        localStorage.setItem('mycity_token', b.token);
+        alert('Login successful');
+        location.href = '/admin.html';
+      } else {
+        alert('Login failed: ' + (b.error || JSON.stringify(b)));
+      }
+    });
+  </script>
+</body>
+</html>

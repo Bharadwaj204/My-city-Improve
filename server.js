@@ -11,6 +11,9 @@ const xss = require('xss-clean');
 const cloudinary = require('cloudinary').v2;
 const fileUpload = require('express-fileupload');
 const nodemailer = require('nodemailer');
+const cors = require('cors');
+const multer = require('multer');
+const streamifier = require('streamifier');
 
 const Complaint = require('./models/Complaint');
 const User = require('./models/User');
